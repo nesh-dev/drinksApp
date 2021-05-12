@@ -2,19 +2,19 @@ export interface ICocktail {
     idDrink: string
     strDrink: string
     strAlcoholic: string
-    strDrinkThumb: string
+    strDrinkThumb: string 
 }
 
 
 export type GetCocktailType = { 
-    cocktails: ICocktail[]
+    cocktails: ICocktail[] | undefined
     loading?: boolean
     error?: string
 }
 
 export type GetCockTailsAction = { 
     type: string
-    cocktails: ICocktail[]
+    cocktails: ICocktail[] | undefined
 }
 
 export type AddCockTailAction = { 

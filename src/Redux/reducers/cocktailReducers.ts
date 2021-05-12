@@ -20,8 +20,14 @@ export const getCocktailReducer = (
     case GET_COCKTAILS:
       return {
         ...state,
-        cocktails: action.cocktails
+        loading: true
       };
+    case GET_COCKTAIL_SUCCESS: 
+      return { 
+        ...state,
+        loading: false,
+        cocktails: action.cocktails
+      }
     default:
       return state;
   }

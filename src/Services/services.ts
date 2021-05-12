@@ -6,5 +6,6 @@ class CocktailService {
         console.log('got called')
         return axios.get(`${baseUrl}/random.php`)
     }
+
 }
 export default CocktailService;
