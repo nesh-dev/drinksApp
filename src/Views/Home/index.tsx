@@ -21,15 +21,15 @@ const Wrapper = styled.div`
   width: 50%;
   flex-direction: row;
   margin-top: 2%;
-  justify-content: space-between;
   flex-wrap: wrap;
+  margin-right: 2%;
 `;
 
 const CardWrapper = styled.div`
   margin-top: 5%;
   width: 30%;
   flex-direction: row; 
-
+  margin-right: 3%;
 `;
 
 const RandomButton = styled.button`
@@ -38,7 +38,7 @@ const RandomButton = styled.button`
   box-sizing: border-box;
   height: 50px;
   flex: 0.5;
-  margin-right: 2%;
+ 
 `;
 const AddButton = styled.button`
   background: #e1b8a0;

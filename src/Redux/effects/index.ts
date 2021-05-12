@@ -10,7 +10,7 @@ export const getCocktails = () => {
     dispatch(getRandomCocktails());
     CocktailService.getCocktailsService()
     .then(res => {
-      dispatch(getRandomSucessCocktails(res.data.drinks))
+      dispatch(getRandomSucessCocktails(res.data.drinks.slice(5)))
     }).catch((error) => {
       console.log(error)
     })
