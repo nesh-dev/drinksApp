@@ -1,13 +1,14 @@
 import React from 'react'; 
 import styled from 'styled-components'; 
 
-const ThemedNavBar = styled.div`
+const ThemedNavBar = styled.nav`
     background-color: #E1B8A0; 
-    height: 30px;
+    height: 50px;
     color: #ffff; 
-    width: 100%; 
-    text-align: center;
-
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `; 
 
 
@@ -16,9 +17,10 @@ const Title = styled.p`
     font-family: Sansita;
     font-style: italic;
     font-weight: 800;
+    font-size: 26px;
 `;
 
-const NavBar = ({}: any)  => {
+const NavBar = ()  => {
     return (
         <div>
             <ThemedNavBar>
