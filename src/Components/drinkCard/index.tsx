@@ -1,6 +1,7 @@
 import React from 'react'; 
 import styled from 'styled-components'; 
-import { ICocktail } from '../../Redux/types/drink'
+import { ICocktail } from '../../Redux/types/drink';
+import { useHistory } from "react-router-dom";
 
 
 const CardWrapper = styled.div`
@@ -19,13 +20,23 @@ const CardTitle = styled.div`
     font-weight: bold; 
 `; 
 
-const CardContent = styled.div`
 
-`; 
+
+
 
 const DrinkCard: React.FC<ICocktail> = ({idDrink, strAlcoholic, strDrinkThumb, strDrink}) => {
+    const history = useHistory();
+    const handleRouteNav = (e: React.MouseEvent<HTMLElement>) => {
+      history.push({
+        pathname: `/drink/${idDrink}`,
+        state: {
+          // location state
+          update: true,
+        },
+      });
+    };
     return (
-        <CardWrapper>
+        <CardWrapper onClick={(e) => handleRouteNav(e)}>
             <img alt={strDrink} src={strDrinkThumb}  width="100%" height="50%"/>
             <CardTitle> {strDrink}</CardTitle>
             <CardTitle>Type: {strAlcoholic}</CardTitle>

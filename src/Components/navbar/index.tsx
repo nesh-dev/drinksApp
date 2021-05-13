@@ -14,8 +14,7 @@ const ThemedNavBar = styled.nav`
 
 const Title = styled.p`
     color: #fff; 
-    font-family: Sansita;
-    font-style: italic;
+   c
     font-weight: 800;
     font-size: 26px;
 `;

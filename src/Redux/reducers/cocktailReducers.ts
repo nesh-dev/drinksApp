@@ -3,7 +3,7 @@ import {
   GetCockTailsAction
 } from '../types/drink';
 import {
-  GET_COCKTAILS, GET_COCKTAIL_FAILURE, GET_COCKTAIL_SUCCESS
+  GET_COCKTAILS, GET_COCKTAIL_FAILURE, GET_COCKTAIL_SUCCESS, 
 } from '../actionTypes/index'
 
 const initialStateGetCocktails: GetCocktailType = {

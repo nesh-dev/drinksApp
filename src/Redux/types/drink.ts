@@ -17,6 +17,16 @@ export type GetCockTailsAction = {
     cocktails: ICocktail[] | undefined
 }
 
+export type SearchCocktailAction = { 
+    type: string
+    cocktails: ICocktail[]
+}
+
+export type GetCockTailDetailAction = { 
+    type: string
+    cocktail?: ICocktail
+}
+
 export type AddCockTailAction = { 
     type: string
     cocktail: ICocktail

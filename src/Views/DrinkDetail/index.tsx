@@ -1,3 +1,8 @@
+
+
+
+
+
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import _ from "lodash";
@@ -119,7 +124,8 @@ export default function Home() {
 
 
   const handleEsc = (event: React.KeyboardEvent<HTMLDivElement>) => { 
-    if(event.key === 'Escape'){ 
+    console.log(event.key, event, 'JASjdasjsd')
+    if(event.key == 'Escape'){ 
       setShowModal(false);
     }
   }
@@ -183,4 +189,6 @@ export default function Home() {
     </div>
   );
 }
+
+
 

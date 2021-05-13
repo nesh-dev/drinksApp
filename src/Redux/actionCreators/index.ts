@@ -1,5 +1,6 @@
+import { type } from 'os';
 import * as actionTypes from '../actionTypes';
-import { ICocktail, GetCockTailsAction } from '../types/drink';
+import { ICocktail, GetCockTailsAction, SearchCocktailAction, GetCockTailDetailAction } from '../types/drink';
 
 
 export const getRandomSucessCocktails = (cocktails: ICocktail[] | undefined): GetCockTailsAction => {
@@ -15,3 +16,54 @@ export const getRandomCocktails = (): GetCockTailsAction => {
         cocktails: []
     }
 }
+
+export const getRandomCocktailItem = (): GetCockTailsAction => { 
+    return { 
+        type: actionTypes.GET_RANDOM_COCKTAIL_ITEM,
+        cocktails: []
+    }
+}
+
+export const getRandomCocktailItemSuccess= (cocktails: ICocktail[] ): GetCockTailsAction => { 
+    return { 
+        type: actionTypes.GET_RANDOM_COCKTAIL_ITEM_SUCCESS,
+        cocktails: cocktails
+    }
+}
+
+export const getRandomCocktailItemFailure= (cocktails: ICocktail[] ): GetCockTailsAction => { 
+    return { 
+        type: actionTypes.GET_RANDOM_COCKTAIL_ITEM_FAILURE,
+        cocktails: cocktails
+    }
+}
+
+export const searchCocktails = (): SearchCocktailAction =>  { 
+    return { 
+        type: actionTypes.SEARCH_COCKTAILS, 
+        cocktails: []
+    }
+}
+
+
+export const searchCocktailsSuccess = (cocktails: ICocktail[]): SearchCocktailAction =>  { 
+    return { 
+        type: actionTypes.SEARCH_COCKTAILS_SUCCESS, 
+        cocktails: cocktails
+    }
+}
+
+export const getDrinkDetail = ():GetCockTailDetailAction => { 
+    return { 
+        type: actionTypes.GET_DRINK_DETAIL, 
+    }
+}
+
+export const getDrinkDetailSuccess = (cocktail: ICocktail) =>  { 
+    return { 
+        type: actionTypes.GET_DRINK_DETAIL, 
+        cocktail: cocktail
+
+    }
+}
+

@@ -1,34 +1,69 @@
-import { getRandomCocktails, getRandomSucessCocktails} from '../actionCreators/index';
+import {
+  getRandomCocktails,
+  getRandomSucessCocktails,
+  searchCocktails,
+  searchCocktailsSuccess,
+  getRandomCocktailItemSuccess,
+  getRandomCocktailItem,
+  getDrinkDetail,
+  getDrinkDetailSuccess,
+} from '../actionCreators/index';
 import { Dispatch } from 'redux';
-import { ICocktail } from '../types/drink'
 import CocktailService from '../../Services/services';
 
 export const getCocktails = () => {
-  
-
-  return async function (dispatch: Dispatch<any>) {
+  return function (dispatch: Dispatch<any>) {
     dispatch(getRandomCocktails());
     CocktailService.getCocktailsService()
-    .then(res => {
-      dispatch(getRandomSucessCocktails(res.data.drinks.slice(5)))
-    }).catch((error) => {
-      console.log(error)
-    })
+      .then(res => {
+        dispatch(getRandomSucessCocktails(res.data.drinks.slice(5)))
+      }).catch((error) => {
+        console.log(error)
+      })
   };
 };
 
-const getManyCocktailsHelper = async () => {
-  let randomCocktails: ICocktail[] | undefined = []
-  for (let i = 0; i < 5; i++) {
-    CocktailService.getCocktailsService()
+
+export const searchCocktailsEffect = (payload: string) => {
+  return function (dispatch: Dispatch<any>) {
+    dispatch(searchCocktails)
+    CocktailService.searchCocktail(payload)
       .then(res => {
-        randomCocktails?.push(res.data.drinks[0])
+        dispatch(searchCocktailsSuccess(res.data.drinks.slice(5)))
+      }).catch((error) => {
+        console.log(error)
+      })
+  };
+};
+
+export const getRandomObjectEffect = () => {
+  return function (dispatch: Dispatch<any>) {
+    dispatch(getRandomCocktailItem());
+
+    CocktailService.getRandomDrink()
+      .then(res => {
+        console.log(res.data)
+        dispatch(getRandomCocktailItemSuccess(res.data.drinks))
       }).catch((error) => {
         console.log(error)
       })
   }
-
-  return randomCocktails
-
-
 }
+
+
+export const getCocktailDetailEffect = (payload: string) => {
+  return function (dispatch: Dispatch<any>) {
+    dispatch(getDrinkDetail());
+
+    CocktailService.getDrinkDetail(payload)
+      .then(res => {
+        console.log(res.data)
+        dispatch(getDrinkDetailSuccess(res.data.drinks[0]))
+      }).catch((error) => {
+        console.log(error)
+      })
+  }
+}
+
+
+

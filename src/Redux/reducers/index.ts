@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux';
-import  { getCocktailReducer } from "./cocktailReducers"
+import  { getCocktailReducer } from "./cocktailReducers"; 
+import { searchCocktailReducer } from "./searchReducer"
+import { getCocktailItemReducer} from "./randomCocktail"
 
 const rootReducer = combineReducers({
-    getCocktailReducer
+    getCocktailReducer, 
+    searchCocktailReducer, 
+    getCocktailItemReducer
 });
 
 export default rootReducer;
