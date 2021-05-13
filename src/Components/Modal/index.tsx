@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ClosePng from '../../assets/close.png'
 
 const Layout = styled.div`
 display: flex;
@@ -89,7 +90,7 @@ const Modal: React.FC<ModalInterface> = ({
   title,
   children,
 }) => {
-  console.log(showModal, "<<<<");
+
   return (
     <React.Fragment>
       <Layout>
@@ -97,7 +98,9 @@ const Modal: React.FC<ModalInterface> = ({
           <ModalContainer onKeyDown={(e) => handleEsc(e)}>
             <ModalHeader>
                 {title}
-            <ModalClose onClick={() => closeModal()}> X </ModalClose>
+            <ModalClose onClick={() => closeModal()}> 
+              <img src={ClosePng} alt="close-icon"/>
+             </ModalClose>
             </ModalHeader>
             <ModalBody>{children}</ModalBody>
           </ModalContainer>

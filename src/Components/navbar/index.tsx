@@ -9,14 +9,18 @@ const ThemedNavBar = styled.nav`
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: Sansita;
+
 `; 
 
 
 const Title = styled.p`
     color: #fff; 
-   c
+    font-family: Sansita;
     font-weight: 800;
     font-size: 26px;
+    font-style: italic;
+
 `;
 
 const NavBar = ()  => {

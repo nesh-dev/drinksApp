@@ -8,13 +8,17 @@ export interface ICocktail {
 
 export type GetCocktailType = { 
     cocktails: ICocktail[] | undefined
+    cocktail?: {}
     loading?: boolean
     error?: string
 }
 
+
+
 export type GetCockTailsAction = { 
     type: string
     cocktails: ICocktail[] | undefined
+    cocktail?: {}
 }
 
 export type SearchCocktailAction = { 
@@ -25,6 +29,12 @@ export type SearchCocktailAction = {
 export type GetCockTailDetailAction = { 
     type: string
     cocktail?: ICocktail
+}
+
+export type GetCockTailDetailType = { 
+    cocktail: ICocktail | undefined
+    loading?: boolean
+    error?: string
 }
 
 export type AddCockTailAction = { 

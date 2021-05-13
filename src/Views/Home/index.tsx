@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
-
 import {
   getCocktails,
   searchCocktailsEffect,
   getRandomObjectEffect,
+  getPopularPosts,
 } from "../../Redux/effects/index";
 import { AppState } from "../../Redux/store";
 import SearchBar from "../../Components/forms/searchBar";
@@ -29,7 +29,7 @@ const Wrapper = styled.div`
   display: flex;
   width: 50%;
   flex-direction: row;
-  margin-top: 2%;
+  margin-top: 1%;
   flex-wrap: wrap;
   margin-right: 2%;
 `;
@@ -61,10 +61,9 @@ const ImageIcon = styled.img`
   position: relative;
 `;
 
-const ModalWrapper = styled.div`
-  width: 50%;
-  display: flex;
-  justfy-content:
+const Title = styled.h2`
+  color: #e1b8a0;
+  margin-top: 2%;
 `;
 
 export default function Home() {
@@ -73,6 +72,7 @@ export default function Home() {
   useEffect(() => {
     console.log("checking");
     dispatch(getCocktails());
+    dispatch(getPopularPosts());
   }, [dispatch]);
 
   const { cocktails, loading, error } = useSelector(
@@ -89,6 +89,10 @@ export default function Home() {
 
   const { cocktails: randomCocktail } = useSelector(
     (state: AppState) => state.getCocktailItemReducer
+  );
+
+  const { cocktails: customCocktails } = useSelector(
+    (state: AppState) => state.getPopularReducer
   );
 
   console.log(randomCocktail, ">>>>");
@@ -117,12 +121,11 @@ export default function Home() {
     setShowModal(false);
   };
 
-
-  const handleEsc = (event: React.KeyboardEvent<HTMLDivElement>) => { 
-    if(event.key === 'Escape'){ 
+  const handleEsc = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Escape") {
       setShowModal(false);
     }
-  }
+  };
   if (loading) return <div>loading....</div>;
 
   console.log(searchedCocktails, "?????");
@@ -141,7 +144,7 @@ export default function Home() {
             <ImageIcon src={addImg} />
           </AddButton>
         </Wrapper>
-
+        <Title>Popular Drinks</Title>
         <Wrapper>
           {drinksToDisplay && drinksToDisplay.length > 0
             ? drinksToDisplay?.map((drink, index) => (
@@ -167,9 +170,22 @@ export default function Home() {
                 </CardWrapper>
               ))}
         </Wrapper>
+        <Title>Custom Drinks</Title>
+        <Wrapper>
+          {customCocktails?.map((drink, index) => (
+            <CardWrapper>
+              <DrinkCard
+                key={index}
+                idDrink={drink.idDrink}
+                strAlcoholic={drink.strAlcoholic}
+                strDrinkThumb={drink.strDrinkThumb}
+                strDrink={drink.strDrink}
+              />
+            </CardWrapper>
+          ))}
+        </Wrapper>
       </Container>
       {showModal && (
-        
         <Modal
           showModal={showModal}
           closeModal={closeModal}
@@ -178,9 +194,7 @@ export default function Home() {
         >
           <AddCocktail />
         </Modal>
-     
-    )}
+      )}
     </div>
   );
 }
-

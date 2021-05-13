@@ -1,20 +1,43 @@
-import React from 'react'; 
-import styled from 'styled-components'; 
+import React, {useState} from "react";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import {v4 as uuidv4} from 'uuid';
+import firebase from '../../../firebase';
+import { addPopularPosts } from '../../../Redux/effects'
+import { ICocktail } from "../../../Redux/types/drink";
+
+const db = firebase.database();
 
 const FormInput = styled.input`
-background: #ffffff;
-border: 2px solid #E1B8A0;
-box-sizing: border-box;
-height: 50px;
-position: relative;
-padding-left: 5%;
-width: 100%;
-margin-bottom: 20px;
-&:focus {
-  outline: none;
-  box-shadow: 0px 0px 2px #E1B8A0;
-  border: 2px solid #000000;
-}
+  background: #ffffff;
+  border: 2px solid #e1b8a0;
+  box-sizing: border-box;
+  height: 50px;
+  position: relative;
+  padding-left: 5%;
+  width: 100%;
+  margin-bottom: 20px;
+  &:focus {
+    outline: none;
+    box-shadow: 0px 0px 2px #e1b8a0;
+    border: 2px solid #000000;
+  }
+`;
+
+const SelectInput = styled.select`
+  background: #ffffff;
+  border: 2px solid #e1b8a0;
+  box-sizing: border-box;
+  height: 50px;
+  position: relative;
+  padding-left: 5%;
+  width: 100%;
+  margin-bottom: 20px;
+  &:focus {
+    outline: none;
+    box-shadow: 0px 0px 2px #e1b8a0;
+    border: 2px solid #000000;
+  }
 `;
 
 const SubmitButton = styled.button`
@@ -26,21 +49,41 @@ const SubmitButton = styled.button`
   padding-right: 5%;
 `;
 
- const  AddCocktail = ({ handleSubmit }: any)  => {
-    return (
-        <div>
-            <form onSubmit={handleSubmit}> 
-            <FormInput  placeholder="Drink name"/>
+const AddCocktail = () => {
 
-            <FormInput  placeholder="Type e.g alcholic or none-alcoholic"/>
+  const [strDrink, setStrDrink] = useState(''); 
+  const [strAlcoholic, setStrAlcoholic] = useState(''); 
+  const [strDrinkThumb, setStrDrinkThumb] = useState(''); 
 
-            <FormInput type="file" />
-        
-            <SubmitButton> Submit </SubmitButton>
+  const dispatch = useDispatch();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => { 
+    let myuuid = uuidv4();
+    e.preventDefault();
+    const newCocktailObj: ICocktail = {
+      strDrink, 
+      strAlcoholic, 
+      strDrinkThumb,
+      idDrink: myuuid
+    }
+    dispatch(addPopularPosts(newCocktailObj))
+  }
 
-            </form>
-        </div>
-    )
-}
+  return (
+    <div>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <FormInput placeholder="Drink name"   onChange={(e) => setStrDrink(e.target.value)} required/>
+
+        <SelectInput name="drink type"  onChange={(e) => setStrAlcoholic(e.target.value)} required>
+          <option value="alcoholic">Alcoholic</option>
+          <option value="non-alcoholic">None-alcoholic</option>
+        </SelectInput>
+
+        <FormInput placeholder="URL link to the "   onChange={(e) => setStrDrinkThumb(e.target.value)} required/>
+
+        <SubmitButton> Submit </SubmitButton>
+      </form>
+    </div>
+  );
+};
 
 export default AddCocktail;

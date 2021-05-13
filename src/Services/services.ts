@@ -16,7 +16,7 @@ class CocktailService {
     }
 
     static getDrinkDetail(drinkId: string){ 
-        return axios.get(`${baseUrl}/${API_KEY}/lookup.php?id=${drinkId}`)
+        return axios.get(`${baseUrl}/${API_KEY}/lookup.php?i=${drinkId}`)
     }
 
 }

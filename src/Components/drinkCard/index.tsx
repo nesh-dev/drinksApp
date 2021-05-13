@@ -20,10 +20,6 @@ const CardTitle = styled.div`
     font-weight: bold; 
 `; 
 
-
-
-
-
 const DrinkCard: React.FC<ICocktail> = ({idDrink, strAlcoholic, strDrinkThumb, strDrink}) => {
     const history = useHistory();
     const handleRouteNav = (e: React.MouseEvent<HTMLElement>) => {

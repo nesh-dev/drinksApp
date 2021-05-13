@@ -7,9 +7,14 @@ import {
   getRandomCocktailItem,
   getDrinkDetail,
   getDrinkDetailSuccess,
+  getPopularDrinks,
+  getPopularDrinkSuccess, 
+  addPopularDrinks
 } from '../actionCreators/index';
 import { Dispatch } from 'redux';
 import CocktailService from '../../Services/services';
+import PopularService from '../../Services/popularService'
+import { ICocktail } from '../types/drink';
 
 export const getCocktails = () => {
   return function (dispatch: Dispatch<any>) {
@@ -57,11 +62,33 @@ export const getCocktailDetailEffect = (payload: string) => {
 
     CocktailService.getDrinkDetail(payload)
       .then(res => {
-        console.log(res.data)
+        console.log(res.data.drinks[0])
         dispatch(getDrinkDetailSuccess(res.data.drinks[0]))
       }).catch((error) => {
         console.log(error)
       })
+  }
+}
+
+export const getPopularPosts = () => {
+  return function (dispatch: Dispatch<any>) {
+    dispatch(getPopularDrinks());
+    PopularService.getAll().orderByPriority().limitToLast(5).on("value", (snapshot) => {
+      let pops: any[] = []
+      snapshot.forEach(function (data) {
+          pops.push(data.val())
+      });
+      dispatch(getPopularDrinkSuccess(pops))
+    })
+  }
+}
+
+
+export const addPopularPosts = (payload: ICocktail) => {
+  return function (dispatch: Dispatch<any>) {
+    PopularService.create(payload).on('child_added', (cocktail) => { 
+        dispatch(addPopularDrinks(cocktail.val()))
+    })
   }
 }
 

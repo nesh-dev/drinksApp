@@ -61,9 +61,29 @@ export const getDrinkDetail = ():GetCockTailDetailAction => {
 
 export const getDrinkDetailSuccess = (cocktail: ICocktail) =>  { 
     return { 
-        type: actionTypes.GET_DRINK_DETAIL, 
+        type: actionTypes.GET_DRINK_DETAIL_SUCCESS, 
         cocktail: cocktail
 
     }
 }
 
+export const getPopularDrinks = () => { 
+    return { 
+        type: actionTypes.GET_POPULAR_DRINKS,
+        cocktail: []
+    }
+}
+
+export const getPopularDrinkSuccess= (cocktails: ICocktail[]) => { 
+    return { 
+        type: actionTypes.GET_POPULAR_DRINKS_SUCCESS,
+        cocktails: cocktails
+    }
+}
+
+export const addPopularDrinks = (cocktail: ICocktail) => { 
+    return {
+        type: actionTypes.ADD_COCKTAIL, 
+        cocktail: cocktail
+    }
+}
