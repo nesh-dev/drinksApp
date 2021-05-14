@@ -9,7 +9,6 @@ getCocktailDetailEffect
 } from "../../Redux/effects/index";
 import { AppState } from "../../Redux/store";
 import Navbar from "../../Components/navbar";
-import { ICocktail } from "../../Redux/types/drink";
 
 const Container = styled.div`
   display: flex;
@@ -19,14 +18,6 @@ const Container = styled.div`
   margin-top: 2%;
 `;
 
-const Wrapper = styled.div`
-  display: flex;
-  width: 50%;
-  flex-direction: row;
-  margin-top: 2%;
-  flex-wrap: wrap;
-  margin-right: 2%;
-`;
 
 const CardTitle = styled.div`
     fontsize: 36px; 
@@ -43,16 +34,14 @@ export default function Home() {
   const  params = useParams<ParamTypes>();
 
   useEffect(() => {
-    console.log("checking");
     dispatch(getCocktailDetailEffect(params?.idDrink));
   }, [dispatch, params?.idDrink]);
 
-  const { cocktail, loading, error } = useSelector(
+  const { cocktail } = useSelector(
     (state: AppState) => state.getCocktailDetailReducer
   );
     
 
-  console.log(cocktail, 'uasduasdi')
 
   return (
     <div>

@@ -69,12 +69,6 @@ const Title = styled.h2`
 export default function Home() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log("checking");
-    dispatch(getCocktails());
-    dispatch(getPopularPosts());
-  }, [dispatch]);
-
   const { cocktails, loading, error } = useSelector(
     (state: AppState) => state.getCocktailReducer
   );
@@ -91,11 +85,20 @@ export default function Home() {
     (state: AppState) => state.getCocktailItemReducer
   );
 
-  const { cocktails: customCocktails } = useSelector(
+  const { cocktails: customCocktails, cocktail } = useSelector(
     (state: AppState) => state.getPopularReducer
   );
 
-  console.log(randomCocktail, ">>>>");
+  useEffect(() => {
+    dispatch(getCocktails());
+    dispatch(getPopularPosts());
+    const handlePost = () => {
+      if (cocktail) {
+        closeModal();
+      }
+    };
+    handlePost();
+  }, [dispatch, cocktail]);
 
   const handleSearch = (value: string) => {
     dispatch(searchCocktailsEffect(value));
@@ -103,7 +106,6 @@ export default function Home() {
 
   const onValueChange = (e: React.FormEvent<HTMLInputElement>) => {
     // e.preventDefault()
-    console.log(e.currentTarget.value);
     // _.debounce(handleSearch)(e.currentTarget.value)
   };
 
@@ -128,7 +130,6 @@ export default function Home() {
   };
   if (loading) return <div>loading....</div>;
 
-  console.log(searchedCocktails, "?????");
   return (
     <div>
       <Navbar />

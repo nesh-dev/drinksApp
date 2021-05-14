@@ -12,6 +12,7 @@ box-sizing: border-box;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 flex-direction: column;
 align-items: center;
+
 `; 
 
 const CardTitle = styled.div`
@@ -19,6 +20,12 @@ const CardTitle = styled.div`
     margin-top: 2%; 
     font-weight: bold; 
 `; 
+
+const Image = styled.img`
+  width: 100%; 
+  height: 300px;  
+`; 
+
 
 const DrinkCard: React.FC<ICocktail> = ({idDrink, strAlcoholic, strDrinkThumb, strDrink}) => {
     const history = useHistory();
@@ -33,7 +40,7 @@ const DrinkCard: React.FC<ICocktail> = ({idDrink, strAlcoholic, strDrinkThumb, s
     };
     return (
         <CardWrapper onClick={(e) => handleRouteNav(e)}>
-            <img alt={strDrink} src={strDrinkThumb}  width="100%" height="50%"/>
+            <Image alt={strDrink} src={strDrinkThumb}  />
             <CardTitle> {strDrink}</CardTitle>
             <CardTitle>Type: {strAlcoholic}</CardTitle>
         </CardWrapper>
